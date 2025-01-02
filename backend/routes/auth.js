@@ -8,13 +8,13 @@ router.get("/", (req, res) => {
 
 // create a new user
 router.post("/register", async (req, res) => {
-  const emailRegex =
+  const passRegex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^])[A-Za-z\d@$!%*?&#^]{8,}$/;
   try {
     const userExist = await usetSchema.findOne({ email: req.body.email });
     if (userExist) {
       return res.status(400).json("Email already exists");
-    } else if (!emailRegex.test(req.body.password)) {
+    } else if (!passRegex.test(req.body.password)) {
       return res
         .status(400)
         .json(
