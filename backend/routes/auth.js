@@ -2,8 +2,9 @@ const router = require("express").Router();
 const usetSchema = require("../model/user.model");
 
 // get all users
-router.get("/", (req, res) => {
-  res.json("success");
+router.get("/users", async (req, res) => {
+  const allUsers = await usetSchema.find({});
+  res.status(200).json(allUsers);
 });
 
 // create a new user
