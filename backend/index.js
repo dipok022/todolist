@@ -6,12 +6,14 @@ const dotenv = require("dotenv");
 
 // dotenv and mongoose connect
 dotenv.config();
-(() => {
-  mongoose.connect();
+(async () => {
+  await mongoose.connect(process.env.MONGO_DB);
+  console.log("connect to Database");
 })();
 
 // middleware
 const app = express();
+app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
 
