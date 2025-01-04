@@ -49,9 +49,11 @@ router.post("/login", async (req, res) => {
     if (!user.email || !user.password) {
       return res.status(401).json("Invalid email or password");
     }
+
     const token = jwt.sign(
-      { id: process.env.JWT_SECRET },
-      process.env.JWT_SECRET,
+      { id: user._id, email: user.email },
+      process.env.SECRET_KEY,
+
       {
         expiresIn: "1h",
       }
@@ -61,6 +63,19 @@ router.post("/login", async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
+
+  // Profile Route
+  app.get("/profile", authenticateToken, (req, res) => {
+    const user = usetSchema.find((u) => u.id === req.user.id);
+    // if (!user) return res.status(404).json({ message: "User not found" });
+
+    // res.json({
+    //   id: user.id,
+    //   username: user.username,
+    //   email: user.email,
+    //   bio: user.bio,
+    // });
+  });
 });
 
 module.exports = router;

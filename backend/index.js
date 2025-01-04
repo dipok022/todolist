@@ -10,7 +10,7 @@ const authRouter = require("./routes/auth");
 // dotenv and mongoose connect
 dotenv.config();
 (async () => {
-  await mongoose.connect(process.env.MONGO_DB);
+  await mongoose.connect(process.env.MONGODB_URL);
   console.log("connect to Database");
 })();
 
