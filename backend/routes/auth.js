@@ -1,6 +1,7 @@
 const router = require("express").Router();
 var jwt = require("jsonwebtoken");
 const usetSchema = require("../model/user.model");
+const authenticateToken = require("../middleware/authenticateToken");
 
 // get all users
 router.get("/users", async (req, res) => {
@@ -63,19 +64,11 @@ router.post("/login", async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
+});
 
-  // Profile Route
-  app.get("/profile", authenticateToken, (req, res) => {
-    const user = usetSchema.find((u) => u.id === req.user.id);
-    // if (!user) return res.status(404).json({ message: "User not found" });
-
-    // res.json({
-    //   id: user.id,
-    //   username: user.username,
-    //   email: user.email,
-    //   bio: user.bio,
-    // });
-  });
+// Profile Route
+router.get("/profile", authenticateToken, (req, res) => {
+  res.send(req.user);
 });
 
 module.exports = router;
