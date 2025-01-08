@@ -1,8 +1,4 @@
-const Register = async () => {
-  const data = await fetch("/api/v1/users");
-  const res = await data.json();
-  console.log(res);
-
+const Register = () => {
   return (
     <div className="flex justify-center items-center w-full h-screen">
       <div className="w-[400px] border border-spacing-1 rounded-lg pb-6 px-6">
