@@ -17,7 +17,6 @@ dotenv.config();
 // middleware
 const app = express();
 app.use(express.json());
-p;
 app.use(helmet());
 app.use(morgan("common"));
 

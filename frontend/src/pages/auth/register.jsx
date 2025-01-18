@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -10,9 +11,21 @@ const Register = () => {
 
   const handleChange = (e) => {
     e.preventDefault();
+    axios("/api/v1/register", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      data: userData,
+    })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
-
-  console.log("userData", userData);
 
   return (
     <div className="flex justify-center items-center w-full h-screen">
